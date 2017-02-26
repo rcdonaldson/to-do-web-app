@@ -1,25 +1,14 @@
-var app = angular.module('players', ['ngRoute']);
+angular.module('ToDo', []).
+controller('todoController',['$scope',function($scope){
+  $scope.todos = [];
 
-	app.config(function($routeProvider, $locationProvider) {
-		$routeProvider
-		  .when('/', {
-			templateUrl: 'partials/details.html',
-			controller: 'playerDetail'
-		  })
-		  .otherwise( {redirectTo: '/'} )
-	});
-
-
-	app.controller('playersDetail', {
-    templateUrl: 'partials/detail.html',
-    controller: function PlayerDetailController($scope,$http){
-
-        $http.get('data/players.json').success(function() {
-          $scope.players = data;
-        }).
-        error(function(data, status, headers, config) {
-          // log error
-            console.log("error");
-        });
-    }
-	});
+  $scope.addTodo = function(){
+    $scope.todos.push({'title':$scope.newTodo,'done':false})
+    $scope.newTodo = ''
+  }
+  $scope.clearCompleted = function(){
+    $scope.todos = $scope.todos.filter(function(item){
+      return !item.done
+    })
+  }
+}])
