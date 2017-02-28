@@ -10,16 +10,23 @@
     <link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 <body>
-    <div class="container-fluid">
-      <div ng-controller="todoController">
-         <form name="frm" ng-submit="addTodo()">
-            <input type="text" name="newtodo" ng-model="newTodo" required />
-            <button ng-disabled="frm.$invalid">Add</button>
+    <div class="container">
+     <div class="row">
+     	<hr class="title-line col-sm-6 col-sm-offset-3">
+     	<div class="col-sm-12">
+     		<h2 class="app-title text-center">Angular 1 To Do App</h2>
+     	</div>
+     	<hr class="title-line col-sm-6 col-sm-offset-3">
+     </div>
+      <div ng-controller="row todoController">
+         <form class="form-group" name="frm" ng-submit="addTodo()">
+            <input class="form-control" placeholder="To do..." type="text" name="newtodo" ng-model="newTodo" required />
+            <button class="btn btn-success btn-large" ng-disabled="frm.$invalid">Add</button>
          </form>
-         <button ng-click="clearCompleted()">Clear Completed</button>
+         <button class="btn" ng-click="clearCompleted()">Clear Completed</button>
          <ul>
             <li ng-repeat="todo in todos">
-               <input type="checkbox" ng-model="todo.done" />
+               <input type="checkbox" ng-model="todo.done" /> {{date}}
                <span ng-class="{'done':todo.done}">{{todo.title}}</span>
             </li>
          </ul>
