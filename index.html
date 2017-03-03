@@ -7,35 +7,66 @@
     <title>To Do App</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
     <link rel="stylesheet" type="text/css" href="css/app.css">
+    
+    
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+	
 </head>
 <body>
     <div class="container">
-     <div class="row">
-     	<hr class="title-line col-sm-6 col-sm-offset-3">
-     	<div class="col-sm-12">
-     		<h2 class="app-title text-center">Angular 1 To Do App</h2>
-     	</div>
-     	<hr class="title-line col-sm-6 col-sm-offset-3">
-     </div>
-      <div ng-controller="row todoController">
-         <form class="form-group" name="frm" ng-submit="addTodo()">
-            <input class="form-control" placeholder="To do..." type="text" name="newtodo" ng-model="newTodo" required />
-            <button class="btn btn-success btn-large" ng-disabled="frm.$invalid">Add</button>
+	 <div class="row">
+		<hr class="title-line col-sm-6 col-sm-offset-3">
+		<div class="col-sm-12">
+			<h2 class="app-title text-center">Angular 1 To Do App</h2>
+		</div>
+		<hr class="title-line col-sm-6 col-sm-offset-3">
+	 </div>
+      <div ng-controller="todoController">
+<!--        Add To Do Section-->
+         <form class="form-group add-box" name="frm" ng-submit="addTodo()">
+          <div class="row">
+<!--          	To Do-->
+           <div class="col-md-6">
+            	<input class="input-lg add-text form-control" placeholder="To Do..." type="text" name="newtodo" ng-model="newTodo" required />
+            </div>
+<!--            	Due Date-->
+            <div class="col-md-6">
+            	<div class='input-group date' id='datetimepicker'>
+					<input type='text' placeholder="Due Date..." class="input-lg form-control" />
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
+            	</div>
+			  </div>
+            </div>
+            <button class="add-button btn btn-success btn-large" ng-disabled="frm.$invalid">Add</button>
          </form>
-         <button class="btn" ng-click="clearCompleted()">Clear Completed</button>
-         <ul>
-            <li ng-repeat="todo in todos">
-               <input type="checkbox" ng-model="todo.done" /> {{date}}
-               <span ng-class="{'done':todo.done}">{{todo.title}}</span>
-            </li>
-         </ul>
+<!--         Clear completed button-->
+         <button class="btn clr-button" ng-click="clearCompleted()">Clear Completed</button>
+<!--         To Do Item Section-->
+         <div>
+			 <ul class="panel panel-default">
+				<li class="panel-body" ng-repeat="todo in todos">
+				   <input type="checkbox" ng-model="todo.done" /> {{date}}
+				   <span ng-class="{'done':todo.done}">{{todo.title}}</span>
+				   <button class="btn btn-default">Edit</button>
+				</li>
+			 </ul>
+         </div>
       </div>
     </div> <!-- Container -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
   	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.js"></script>
   	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>
+  	
+  	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+  	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  	
+	
     <script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>
+<!--panel-->
