@@ -3,8 +3,12 @@ controller('todoController',['$scope',function($scope){
   $scope.todos = [];
 
   $scope.addTodo = function(){
-    $scope.todos.push({'title':$scope.newTodo,'done':false})
-    $scope.newTodo = ''
+    $scope.todos.push({
+		'title':$scope.newTodo,'done':false,
+		'date':$scope.newDate,'done':false
+	})
+    $scope.newTodo = '',
+	$scope.newDate = ''
   }
   $scope.editTodo = function() {
   
@@ -16,7 +20,7 @@ controller('todoController',['$scope',function($scope){
   }
 }])
 
-$('#datetimepicker').data("DateTimePicker").FUNCTION()
+//$('#datetimepicker').data("DateTimePicker").FUNCTION()
 //$(function () {
 //	$('#datetimepicker').datetimepicker();
 //});

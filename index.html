@@ -27,19 +27,22 @@
 <!--        Add To Do Section-->
          <form class="form-group add-box" name="frm" ng-submit="addTodo()">
           <div class="row">
+          
 <!--          	To Do-->
            <div class="col-md-6">
             	<input class="input-lg add-text form-control" placeholder="To Do..." type="text" name="newtodo" ng-model="newTodo" required />
             </div>
+            
 <!--            	Due Date-->
             <div class="col-md-6">
             	<div class='input-group date' id='datetimepicker'>
-					<input type='text' placeholder="Due Date..." class="input-lg form-control" />
+					<input class="input-lg form-control" type='date' placeholder="Due Date..." ng-model="newDate"  />
 					<span class="input-group-addon">
 						<span class="glyphicon glyphicon-calendar"></span>
 					</span>
             	</div>
 			  </div>
+           
             </div>
             <button class="add-button btn btn-success btn-large" ng-disabled="frm.$invalid">Add</button>
          </form>
@@ -48,10 +51,11 @@
 <!--         To Do Item Section-->
          <div>
 			 <ul class="panel panel-default">
-				<li class="panel-body" ng-repeat="todo in todos">
-				   <input type="checkbox" ng-model="todo.done" /> {{date}}
+				<li class="todo-item panel-body" ng-repeat="todo in todos">
+				   <input class="checkbox checkbox-success" type="checkbox" ng-model="todo.done" />
 				   <span ng-class="{'done':todo.done}">{{todo.title}}</span>
-				   <button class="btn btn-default">Edit</button>
+				   <span ng-class="{'done':todo.done}"> {{todo.date}}</span>
+				   <button class="btn btn-default pull-right">Edit</button>
 				</li>
 			 </ul>
          </div>
@@ -62,8 +66,10 @@
   	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.js"></script>
   	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>
   	
+<!--
   	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
   	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+-->
   	
 	
     <script type="text/javascript" src="js/app.js"></script>

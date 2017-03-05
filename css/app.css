@@ -33,3 +33,9 @@ ul {
 .clr-button {
 	margin-bottom: 20px;
 }
+
+
+.todo-item {
+	border-top: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+}
