@@ -7,11 +7,11 @@
     <title>To Do App</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>-->
     <link rel="stylesheet" type="text/css" href="css/app.css">
     
     
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<!--	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>-->
 	
 </head>
 <body>
@@ -47,19 +47,45 @@
             <button class="add-button btn btn-success btn-large" ng-disabled="frm.$invalid">Add</button>
          </form>
 <!--         Clear completed button-->
-         <button class="btn clr-button" ng-click="clearCompleted()">Clear Completed</button>
+         <button class="btn btn-danger clr-button" ng-click="clearCompleted()">Clear Completed</button>
 <!--         To Do Item Section-->
-         <div>
-			 <ul class="panel panel-default">
-				<li class="todo-item panel-body" ng-repeat="todo in todos">
-				   <input class="checkbox checkbox-success" type="checkbox" ng-model="todo.done" />
+         <div class="panel panel-default">
+         	<div class="panel-heading">My To Do's</div>
+			 <ul class="list-group">
+				<li class="list-group-item" ng-repeat="todo in todos">
+				   <input class="" type="checkbox" ng-model="todo.done" />
 				   <span ng-class="{'done':todo.done}">{{todo.title}}</span>
 				   <span ng-class="{'done':todo.done}"> {{todo.date}}</span>
-				   <button class="btn btn-default pull-right">Edit</button>
+				   <a class="btn btn-danger pull-right" ng-click="removeTodo(todo)">Delete</a>
+				   <a class="btn btn-default pull-right" data-toggle="modal" data-target="#editModal" ng-click="showEditForm(todo)">Edit</a>
 				</li>
 			 </ul>
          </div>
       </div>
+<!--      Edit Modal-->
+    <div class="modal fade" id="editModal" role="dialog">
+    	<div class="modal-dialog modal-lg">
+		  <div class="modal-content">
+			<div class="modal-header">
+				<h2>Edit To Do</h2>
+			</div>
+			<div class="modal-body">
+				<ul class="list-group">
+					<li class="list-group-item" ng-repeat="todo in todos">
+					   <input class="" type="checkbox" ng-model="todo.done" />
+					   <span ng-class="{'done':todo.done}">{{todo.title}}</span>
+					   <span ng-class="{'done':todo.done}"> {{todo.date}}</span>
+					</li>
+				 </ul>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-defaul">Cancel</button>
+				<button type="submit" class="btn btn-sucess">Submit</button>
+			</div>
+		  </div>
+		</div>
+    </div>
+      
     </div> <!-- Container -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
