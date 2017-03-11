@@ -7,12 +7,8 @@
     <title>To Do App</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>-->
     <link rel="stylesheet" type="text/css" href="css/app.css">
     
-    
-<!--	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>-->
-	
 </head>
 <body>
     <div class="container">
@@ -36,10 +32,11 @@
 <!--            	Due Date-->
             <div class="col-md-6">
             	<div class='input-group date' id='datetimepicker'>
-					<input class="input-lg form-control" type='date' placeholder="Due Date..." ng-model="newDate"  />
+					<input class="input-lg form-control" type='date' date-formate="yyyy-mm-dd" placeholder="Due Date..." ng-model="newDate"  />
 					<span class="input-group-addon">
 						<span class="glyphicon glyphicon-calendar"></span>
 					</span>
+<!--           			<datepicker style="flex1" date-formate="yyyy-mm-dd"></datepicker>-->
             	</div>
 			  </div>
            
@@ -52,10 +49,19 @@
          <div class="panel panel-default">
          	<div class="panel-heading">My To Do's</div>
 			 <ul class="list-group">
-				<li class="list-group-item" ng-repeat="todo in todos">
+			 
+				<li class="list-group-item" ng-repeat="todo in todos | filter:{ done: false } track by todo.id">
 				   <input class="" type="checkbox" ng-model="todo.done" />
 				   <span ng-class="{'done':todo.done}">{{todo.title}}</span>
-				   <span ng-class="{'done':todo.done}"> {{todo.date}}</span>
+				   <span ng-class="{'done':todo.done}">{{todo.date}}</span>
+				   <a class="btn btn-danger pull-right" ng-click="removeTodo(todo)">Delete</a>
+				   <a class="btn btn-default pull-right" data-toggle="modal" data-target="#editModal" ng-click="showEditForm(todo)">Edit</a>
+				</li>
+				
+				<li class="list-group-item" ng-repeat="todo in todos | filter:{ done: true } track by todo.id">
+				   <input class="" type="checkbox" ng-model="todo.done" />
+				   <span ng-class="{'done':todo.done}">{{todo.title}}</span>
+				   <span ng-class="{'done':todo.done}">{{todo.date}}</span>
 				   <a class="btn btn-danger pull-right" ng-click="removeTodo(todo)">Delete</a>
 				   <a class="btn btn-default pull-right" data-toggle="modal" data-target="#editModal" ng-click="showEditForm(todo)">Edit</a>
 				</li>
@@ -71,16 +77,16 @@
 			</div>
 			<div class="modal-body">
 				<ul class="list-group">
-					<li class="list-group-item" ng-repeat="todo in todos">
+					<li class="list-group-item">
 					   <input class="" type="checkbox" ng-model="todo.done" />
 					   <span ng-class="{'done':todo.done}">{{todo.title}}</span>
-					   <span ng-class="{'done':todo.done}"> {{todo.date}}</span>
+					   <span ng-class="{'done':todo.done}">{{todo.date}}</span>
 					</li>
 				 </ul>
 			</div>
 			<div class="modal-footer">
-				<button class="btn btn-defaul">Cancel</button>
-				<button type="submit" class="btn btn-sucess">Submit</button>
+				<button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+				<button type="submit" class="btn btn-success">Submit</button>
 			</div>
 		  </div>
 		</div>
@@ -91,13 +97,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
   	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.js"></script>
   	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>
-  	
-<!--
-  	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-  	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
--->
-  	
-	
+  	<script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="  crossorigin="anonymous"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"></script>
+
     <script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>
