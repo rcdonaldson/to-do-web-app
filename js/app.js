@@ -1,65 +1,54 @@
-//.run( ($rootScope, metaData) => {
-//    // We'll inject our constant 'metaData' into the rootScope so that is accessible
-//    // in our index.html
-//    $rootScope.metaData = metaData
-//
-//    // We will test the support for localStorage once at startup and then cache the
-//    // result for later use by our service component.
-//    try {
-//        localStorage.setItem("testKey", "this is the value to be saved")
-//        localStorage.removeItem("testKey")
-//        $rootScope.haslocalStorageSupport = true
-//    }
-//    catch(error){
-//        $rootScope.haslocalStorageSupport = false
-//    }
-//
-//  } )
+angular
+	.module('ToDo', 'ui.bootstrap.modal', ['ui.bootstrap.modal', 'ui.bootstrap.multiMap', 'ui.bootstrap.stackedMap', 'ui.bootstrap.position'])
+	.run( ($rootScope) => {
+		// We will test the support for localStorage once at startup and then cache the
+		// result for later use by our service component.
+		try {
+			localStorage.setItem("testKey", "this is the value to be saved")
+			localStorage.removeItem("testKey")
+			$rootScope.haslocalStorage = true
+		}
+		catch(error){
+			$rootScope.haslocalStorage = false
+		}
+  	} )
+	.controller('todoController',['$scope', '$rootScope', function($scope, $rootScope){
+  
+	$scope.getDefaultTodo = function() {
+			return {id: cuid(), title: '', date: '', done: false}
+		}
 
-angular.module('ToDo', []).
-controller('todoController',['$scope',function($scope){
-  $scope.todos = [];
-	
-//	Local Storage
-//  var todoList = {
-//	title: title,
-//	date: date
-//  }
-//  if(localStorage.getItem('todoList') === null {
-//	var todoList = [];
-//	todoList.push(todoList);
-//	localStorage.setItem('todoLIst', JSON.stringify(todoList));
-//    }  else {
-//        var todoList = JSON.parse(localStorage.getItem('todoList'));
-//        todoList.push(todoList);
-//        localStorage.setItem('todoLIst', JSON.stringify(todoList));
-//}
+		
+		$scope.newTodo = $scope.getDefaultTodo()
+		
+		if ($rootScope.haslocalStorage) {
+			conts storedList = JSON.parse(localStorage.getItem('todoList'))
+			$scope.todos = Array.isArray(storedList) ? storedList : []
+		}
+		else {
+			$scope.todos = []
+		}
+		
+	$scope.syncLocalStorage = function () {
+		if ($rootScope.haslocalStorage) {
+		localStorage.setItem('todoList', JSON.stringify($scope.todos))
+		}
+	}
 
 //	Add To Do
-  $scope.addTodo = function(){
-    $scope.todos.push({
-		'title':$scope.newTodo,'done':false,
-		'date':$scope.newDate
-	})
-    $scope.newTodo = '',
-	$scope.newDate = ''
-//	$scope.newTodo.id = cuid()
-//	$scope.todoList.push($scope.newTodo)
-//	$scope.syncLocalStorage()
+  $scope.addTodo = function() {
+	$scope.newTodo.id = cuid()
+    $scope.todos.push($scope.newTodo)
+	//reset newToso object with a default empty object
+    $scope.newTodo = $scope.getDefaultTodo()
+	$scope.syncLocalStorage()
   }
 
 //  Edit To Do
-  $scope.editTodo = function() {
-	var id = $scope.id;
-	var record = $scope.todos.$getRecord(id);
-	record.title = $scope.title;
-	record.data = $scope.date;
-
-	//save
-	$scope.todos.$save(record).then(function(ref) {
-		var id = ref.key();
-	});
-//	$scope.syncLocalStorage()
+  $scope.populateEditForm = function(todo) {
+	$scope.editingTodo = todo
+	
+	$scope.syncLocalStorage()
   }
 
 //  $scope.removeTodo = function(todo){
@@ -72,7 +61,7 @@ controller('todoController',['$scope',function($scope){
     $scope.todos = $scope.todos.filter(function(item){
     	return !item.done
     })
-//	$scope.syncLocalStorage()
+	$scope.syncLocalStorage()
   }
   
 }]);
