@@ -1,5 +1,5 @@
 angular
-	.module('ToDo', 'ui.bootstrap.modal', ['ui.bootstrap.modal', 'ui.bootstrap.multiMap', 'ui.bootstrap.stackedMap', 'ui.bootstrap.position'])
+	.module('ToDo', [])
 	.run( ($rootScope) => {
 		// We will test the support for localStorage once at startup and then cache the
 		// result for later use by our service component.
@@ -22,7 +22,7 @@ angular
 		$scope.newTodo = $scope.getDefaultTodo()
 		
 		if ($rootScope.haslocalStorage) {
-			conts storedList = JSON.parse(localStorage.getItem('todoList'))
+			const storedList = JSON.parse(localStorage.getItem('todoList'))
 			$scope.todos = Array.isArray(storedList) ? storedList : []
 		}
 		else {
