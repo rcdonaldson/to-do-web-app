@@ -21,11 +21,6 @@
 	margin-top: 1rem;
 }
 
-.done {
-	text-decoration: line-through;
-	color: #ccc;
-}
-
 ul {
 	list-style: none;
 }
@@ -34,11 +29,35 @@ ul {
 	margin-bottom: 20px;
 }
 
+.group-done {
+	padding-top: 20px;
+}
 
-/*
-.todo-item {
-	border-top: 1px solid lightgray;
-	border-bottom: 1px solid lightgray;
-	margin-left: 0;
-	padding-left: 0;
-}*/
+.container {
+	margin-top: 10px;
+	height: 95vh;
+}
+
+.todo-items {
+	padding-top: 15px;
+}
+
+input[type=checkbox].form-control {
+	width: 25px;
+	height: 25px;
+	display: inline-block;
+	vertical-align: -8px;
+}
+
+.edit-button {
+	margin: -6px;
+}
+
+.done {
+	text-decoration: line-through;
+	color: #798087;
+}
+
+.item-done {
+	background-color: #f7f8f9;
+}

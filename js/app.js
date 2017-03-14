@@ -1,5 +1,5 @@
 angular
-	.module('ToDo', [])
+	.module('ToDo', ["ui.bootstrap.modal"])
 	.run( ($rootScope) => {
 		// We will test the support for localStorage once at startup and then cache the
 		// result for later use by our service component.
@@ -50,10 +50,27 @@ angular
 	
 	$scope.syncLocalStorage()
   }
+  
+  $scope.open = function() {
+  $scope.showModal = true;
+};
+
+$scope.ok = function() {
+  $scope.showModal = false;
+};
+
+$scope.cancel = function() {
+  $scope.showModal = false;
+};
 
 //  $scope.removeTodo = function(todo){
 //	$scope.todos.$remove(todo);
 //	$scope.syncLocalStorage()
+//  }
+  
+  	// Delete Todo
+//  $scope.removeTodo = function() {
+//	$scope.todo.splice($scope.todo.indexOf($scope.todo), 1)
 //  }
   
 //  Completed
